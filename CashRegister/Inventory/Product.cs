@@ -20,7 +20,7 @@ public class Product(string productCode, string productName, int priceInCents)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == this.GetType() && Equals((Product)obj);
+        return obj.GetType() == GetType() && Equals((Product)obj);
     }
 
     public override int GetHashCode()
