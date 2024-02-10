@@ -1,23 +1,27 @@
 using CashRegister.Logger;
+using CashRegister.Management;
 using Microsoft.Extensions.Logging;
 
-namespace CashRegister.Navigation;
+namespace CashRegister.UserInterface;
 
+public delegate void OptionCallback(Navigation navigation, Inventory inventory, Invoice invoice);
 public class Option
 {
     public string Selector { get; }
     public string Title { get; }
-
-    public Option(string selector, string title)
+    private readonly OptionCallback? _callback;
+    
+    public Option(string selector, string title, OptionCallback? callback)
     {
         if (selector == "" || title == "")
         {
             new CashRegisterLogger().Log(LogLevel.Critical, $"Invalid values to create option Selector[{selector}] - Title[{title}]");
             throw new ArgumentException($"Invalid values to create option Selector[{selector}] - Title[{title}");
         }
-
+        
         Selector = selector;
         Title = title;
+        _callback = callback;
     }
 
     public override string ToString()
@@ -41,5 +45,10 @@ public class Option
     public override int GetHashCode()
     {
         return Selector.GetHashCode();
+    }
+
+    public void Execute(Navigation navigation, Inventory inventory, Invoice invoice)
+    {
+        _callback?.Invoke(navigation, inventory, invoice);
     }
 }
