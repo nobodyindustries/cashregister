@@ -1,7 +1,8 @@
-using CashRegister.Inventory;
+using CashRegister.Management;
 
-namespace TestCashRegister;
+namespace TestCashRegister.TestProductManagement;
 
+[TestFixture]
 public class TestProduct
 {
     [Test]
@@ -34,6 +35,8 @@ public class TestProduct
             Assert.That(p, Is.Not.EqualTo(pDifferentCode));
             Assert.That(p, Is.Not.EqualTo(pDifferentName));
             Assert.That(p, Is.Not.EqualTo(pDifferentPrice));
+            Assert.That(p, Is.Not.EqualTo(null));
+            Assert.That(p, Is.EqualTo(p));
         });
     }
 
@@ -47,6 +50,7 @@ public class TestProduct
         Assert.Multiple(() =>
         {
             #pragma warning disable NUnit2009
+            // The hash code needs to be deterministic (no usage of, for example, random)
             Assert.That(p.GetHashCode(), Is.EqualTo(p.GetHashCode()));
             #pragma warning restore NUnit2009
             Assert.That(p.GetHashCode(), Is.EqualTo(pEqual.GetHashCode()));

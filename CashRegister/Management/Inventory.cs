@@ -1,10 +1,8 @@
-using System.Data;
 using CashRegister.Logger;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.FileIO;
 
-namespace CashRegister.Inventory;
+namespace CashRegister.Management;
 
 public sealed class Inventory
 {

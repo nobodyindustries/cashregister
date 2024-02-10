@@ -1,4 +1,4 @@
-﻿using CashRegister.Inventory;
+﻿using CashRegister.Management;
 
 var i = new Inventory("./Data/products.csv");
 

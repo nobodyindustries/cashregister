@@ -1,14 +1,16 @@
-using CashRegister.Inventory;
+using CashRegister.Management;
 using Microsoft.VisualBasic.FileIO;
+using FileNotFoundException = System.IO.FileNotFoundException;
 
-namespace TestCashRegister;
+namespace TestCashRegister.TestProductManagement;
 
+[TestFixture]
 public class TestInventory
 {
     [Test]
     public void TestInventoryInvalidFilename()
     {
-        Assert.Throws<FileNotFoundException>(() => _ = new Inventory("non_existing_file.csv"));
+        Assert.Throws(typeof(FileNotFoundException), () => _ = new Inventory("non_existing_file.csv"));
     }
 
     [Test]

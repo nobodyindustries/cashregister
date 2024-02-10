@@ -1,6 +1,6 @@
-namespace CashRegister.Inventory;
+namespace CashRegister.Management;
 
-public class Product(string productCode, string productName, int priceInCents)
+public sealed class Product(string productCode, string productName, int priceInCents)
 {
     private string ProductCode { get; } = productCode;
     private string ProductName { get; } = productName;
