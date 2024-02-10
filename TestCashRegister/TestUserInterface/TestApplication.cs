@@ -11,7 +11,7 @@ public partial class TestApplication
 {
     
     private readonly Inventory _inventory = new("./TestData/valid_products.csv");
-    private readonly Invoice _invoice = new();
+    private readonly Basket _basket = new();
     
     [GeneratedRegex("(.*)MAIN MENU(.*)(ADD PRODUCT TO INVOICE(.*)){2}(MAIN MENU(.*)){2}", RegexOptions.Singleline)]
     private static partial Regex NavigationSuccessfulRegex();
@@ -19,7 +19,7 @@ public partial class TestApplication
     [Test]
     public void TestApplicationRun()
     {
-        var app = new Application(_inventory, _invoice);
+        var app = new Application(_inventory, _basket);
         
         var sw = new StringWriter();
         Console.SetOut(sw);

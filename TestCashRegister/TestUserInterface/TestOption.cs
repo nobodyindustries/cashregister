@@ -6,16 +6,16 @@ namespace TestCashRegister.TestUserInterface;
 [TestFixture]
 public class TestOption
 {
-    public static readonly OptionCallback NoopCallback = (_, _, _) => { };
+    private static readonly OptionCallback NoopCallback = (_, _, _) => { };
     private readonly Inventory _inventory;
-    private readonly Invoice _invoice;
+    private readonly Basket _basket;
     private readonly Application? _application;
     
     public TestOption()
     {
         _inventory = new Inventory("./TestData/valid_products.csv");
-        _invoice = new Invoice();
-        _application = new Application(_inventory, _invoice);
+        _basket = new Basket();
+        _application = new Application(_inventory, _basket);
     }
     
     [Test]
@@ -97,7 +97,7 @@ public class TestOption
         }
         else
         {
-            o.Execute(_application, _inventory, _invoice);
+            o.Execute(_application, _inventory, _basket);
 
             var output = sw.ToString();
             Assert.That(output, Is.EqualTo(message));    
@@ -117,7 +117,7 @@ public class TestOption
             Assert.DoesNotThrow(() =>
             {
             
-                o.Execute(_application, _inventory, _invoice);
+                o.Execute(_application, _inventory, _basket);
             });
         }
     }

@@ -8,14 +8,14 @@ public class TestMenu
 {
     
     private readonly Inventory _inventory;
-    private readonly Invoice _invoice;
+    private readonly Basket _basket;
     private readonly Application? _application;
     
     public TestMenu()
     {
         _inventory = new Inventory("./TestData/valid_products.csv");
-        _invoice = new Invoice();
-        _application = new Application(_inventory, _invoice);
+        _basket = new Basket();
+        _application = new Application(_inventory, _basket);
     }
     
     [Test]
@@ -75,7 +75,7 @@ public class TestMenu
         }
         else
         {
-            m.Prompt(_application, _inventory, _invoice);
+            m.Prompt(_application, _inventory, _basket);
             // The Prompt method should just finish
             Assert.That(sw.ToString(), Is.EqualTo("> "));
         }
@@ -98,7 +98,7 @@ public class TestMenu
         }
         else
         {
-            m.Prompt(_application, _inventory, _invoice);
+            m.Prompt(_application, _inventory, _basket);
             // Prompt, then error message, then prompt again for
             // the input of the correct selector
             Assert.That(sw.ToString(), Is.EqualTo("> \nInvalid option\n> "));

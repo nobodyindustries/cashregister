@@ -2,7 +2,7 @@
 using CashRegister.UserInterface;
 
 var inventory = new Inventory("./Data/products.csv");
-var invoice = new Invoice();
+var invoice = new Basket();
 
 var application = new Application(inventory, invoice);
 application.Run();

@@ -46,7 +46,7 @@ public class Menu(string title)
         return input != null && _options.Values.Any((option) => option.Selector == input);
     }
 
-    public void Prompt(Application application, Inventory inventory, Invoice invoice)
+    public void Prompt(Application application, Inventory inventory, Basket basket)
     {
         string? currentInput = null;
         while (currentInput == null || !ValidOption(currentInput))
@@ -60,7 +60,7 @@ public class Menu(string title)
             Console.WriteLine("Invalid option");
         }
 
-        _options[currentInput].Execute(application, inventory, invoice);
+        _options[currentInput].Execute(application, inventory, basket);
     }
     
 }

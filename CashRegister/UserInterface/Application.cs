@@ -14,12 +14,12 @@ public class Application
     private ApplicationMenuId _currentMenuId = ApplicationMenuId.ApplicationMenuMain;
     private bool _isRunning = true;
     private readonly Inventory _inventory;
-    private readonly Invoice _invoice;
+    private readonly Basket _basket;
 
-    public Application(Inventory appInventory, Invoice appInvoice)
+    public Application(Inventory appInventory, Basket appBasket)
     {
         _inventory = appInventory;
-        _invoice = appInvoice;
+        _basket = appBasket;
         
         // Create Main Menu
         var menu = new Menu("MAIN MENU");
@@ -35,7 +35,7 @@ public class Application
         menu.AddOption(option);
         option = new Option("F", "Apply offers, finalize and print invoice", (application, _, invoice) =>
         {
-            invoice.ApplyDiscountRules();
+            invoice.ApplyRules();
             Console.Write(invoice.ToString());
             // Stays in the main menu after outputting the information
         });
@@ -79,7 +79,7 @@ public class Application
         {
             var currentMenu = _menus[_currentMenuId];
             Console.Write(currentMenu.ToString());
-            currentMenu.Prompt(this, _inventory, _invoice);
+            currentMenu.Prompt(this, _inventory, _basket);
         }
     }
 }

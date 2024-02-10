@@ -4,7 +4,7 @@ public sealed class Product(string productCode, string productName, int priceInC
 {
     public string ProductCode { get; } = productCode;
     public string ProductName { get; } = productName;
-    private int PriceInCents { get; } = priceInCents;
+    public int PriceInCents { get; } = priceInCents;
 
     public override string ToString()
     {
