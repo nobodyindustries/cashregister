@@ -36,7 +36,9 @@ public class TestProduct
             Assert.That(p, Is.Not.EqualTo(pDifferentName));
             Assert.That(p, Is.Not.EqualTo(pDifferentPrice));
             Assert.That(p, Is.Not.EqualTo(null));
+            #pragma warning disable NUnit2009
             Assert.That(p, Is.EqualTo(p));
+            #pragma warning restore NUnit2009
         });
     }
 
