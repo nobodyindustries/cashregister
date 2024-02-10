@@ -2,8 +2,8 @@ namespace CashRegister.Management;
 
 public sealed class Product(string productCode, string productName, int priceInCents)
 {
-    private string ProductCode { get; } = productCode;
-    private string ProductName { get; } = productName;
+    public string ProductCode { get; } = productCode;
+    public string ProductName { get; } = productName;
     private int PriceInCents { get; } = priceInCents;
 
     public override string ToString()
@@ -26,5 +26,11 @@ public sealed class Product(string productCode, string productName, int priceInC
     public override int GetHashCode()
     {
         return HashCode.Combine(ProductCode, ProductName, PriceInCents);
+    }
+    
+    public static int CompareProducts(Product x, Product y)
+    {
+        
+        return 0;
     }
 }

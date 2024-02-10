@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CashRegister.UserInterface;
 
-public delegate void OptionCallback(Navigation navigation, Inventory inventory, Invoice invoice);
+public delegate void OptionCallback(Application application, Inventory inventory, Invoice invoice);
 public class Option
 {
     public string Selector { get; }
@@ -47,8 +47,8 @@ public class Option
         return Selector.GetHashCode();
     }
 
-    public void Execute(Navigation navigation, Inventory inventory, Invoice invoice)
+    public void Execute(Application application, Inventory inventory, Invoice invoice)
     {
-        _callback?.Invoke(navigation, inventory, invoice);
+        _callback?.Invoke(application, inventory, invoice);
     }
 }

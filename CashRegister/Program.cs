@@ -1,5 +1,8 @@
 ﻿using CashRegister.Management;
+using CashRegister.UserInterface;
 
-var i = new Inventory("./Data/products.csv");
+var inventory = new Inventory("./Data/products.csv");
+var invoice = new Invoice();
 
-Console.WriteLine(i.GetProductById("CF1")?.ToString());
+var application = new Application(inventory, invoice);
+application.Run();

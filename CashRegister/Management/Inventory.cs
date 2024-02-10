@@ -4,6 +4,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace CashRegister.Management;
 
+
 public sealed class Inventory
 {
     private readonly Dictionary<string, Product> _database;
@@ -48,7 +49,14 @@ public sealed class Inventory
             }
         }
     }
-
+    
+    public List<Product> GetSortedProductList()
+    {
+        var products = _database.Values.ToList();
+        products.Sort(Product.CompareProducts);
+        return products;
+    }
+    
     public Product? GetProductById(string id)
     {
         _database.TryGetValue(id, out var p);

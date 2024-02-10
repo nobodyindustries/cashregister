@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text;
 using CashRegister.Logger;
 using CashRegister.Management;
@@ -11,7 +12,7 @@ public class Menu(string title)
 
     private void CheckOptionAlreadyExisting(Option o)
     {
-        var r = _options.ContainsValue(o);
+        var r = !_options.ContainsValue(o);
         if (r) return;
         new CashRegisterLogger().Log(LogLevel.Critical, $"Duplicated option: Selector[{o.Selector}] - Title[{o.Title}]");
         throw new ArgumentException($"Invalid values to create option Selector[{o.Selector}] - Title[{o.Title}");
@@ -28,7 +29,10 @@ public class Menu(string title)
         var sb = new StringBuilder();
         sb.AppendLine("");
         sb.AppendLine($"= {title} =");
-        sb.AppendLine("");
+        if (_options.Values.Count > 0)
+        {
+            sb.AppendLine("");    
+        }
         foreach(var o in _options.Values)
         {
             sb.AppendLine(o.ToString());
@@ -42,16 +46,21 @@ public class Menu(string title)
         return input != null && _options.Values.Any((option) => option.Selector == input);
     }
 
-    public void Prompt(Navigation navigation, Inventory inventory, Invoice invoice)
+    public void Prompt(Application application, Inventory inventory, Invoice invoice)
     {
         string? currentInput = null;
         while (currentInput == null || !ValidOption(currentInput))
         {
-            Console.Write(">");
+            Console.Write("> ");
             currentInput = Console.ReadLine();
+            if (currentInput == null) continue;
+            currentInput = currentInput.Trim();
+            if (ValidOption(currentInput)) continue;
+            Console.WriteLine();
+            Console.WriteLine("Invalid option");
         }
 
-        _options[currentInput].Execute(navigation, inventory, invoice);
+        _options[currentInput].Execute(application, inventory, invoice);
     }
     
 }
