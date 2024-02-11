@@ -30,7 +30,6 @@ public sealed class Product(string productCode, string productName, int priceInC
     
     public static int CompareProducts(Product x, Product y)
     {
-        
         return 0;
     }
 }

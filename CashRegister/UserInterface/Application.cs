@@ -28,15 +28,14 @@ public class Application
             application.SetCurrentMenu(ApplicationMenuId.ApplicationMenuAddProduct);
         });
         menu.AddOption(option);
-        option = new Option("R", "Clear invoice", (_, _, invoice) =>
+        option = new Option("R", "Clear invoice", (_, _, basket) =>
         {
-            invoice.Clear();
+            basket.Clear();
         });
         menu.AddOption(option);
-        option = new Option("F", "Apply offers, finalize and print invoice", (application, _, invoice) =>
+        option = new Option("F", "View current invoice", (_, _, basket) =>
         {
-            invoice.ApplyRules();
-            Console.Write(invoice.ToString());
+            Console.Write(basket.ToString());
             // Stays in the main menu after outputting the information
         });
         menu.AddOption(option);
@@ -48,9 +47,9 @@ public class Application
         menu = new Menu("ADD PRODUCT TO INVOICE");
         foreach (var p in _inventory.GetSortedProductList())
         {
-            option = new Option(p.ProductCode, p.ProductName, (_, _, invoice) =>
+            option = new Option(p.ProductCode, p.ProductName, (_, _, basket) =>
             {
-                invoice.AddProduct(p);
+                basket.AddProduct(p);
             });
             menu.AddOption(option);
         }

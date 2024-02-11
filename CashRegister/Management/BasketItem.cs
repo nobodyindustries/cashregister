@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace CashRegister.Management;
 
 public class BasketItem(Product item)
@@ -11,4 +13,10 @@ public class BasketItem(Product item)
         return decimal.Round(priceInUnits, 2, MidpointRounding.AwayFromZero);
     }
 
+    public override string ToString()
+    {
+        var individualPriceInUnits = Convert.ToDecimal(Item.PriceInCents / 100.0);
+        decimal.Round(individualPriceInUnits, 2, MidpointRounding.AwayFromZero);
+        return $"{Item.ProductName} ({individualPriceInUnits}€) x {Quantity} = {CalculatePrice().ToString(CultureInfo.InvariantCulture)}€";
+    }
 }
