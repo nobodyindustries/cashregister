@@ -20,7 +20,7 @@ public class TestBasket
         
         Assert.Multiple(() =>
         {
-            Assert.That(basket.Content.Count, Is.EqualTo(1));
+            Assert.That(basket.Content, Has.Count.EqualTo(1));
             Assert.That(totalItemCount, Is.EqualTo(1));
         });
     }
@@ -36,7 +36,7 @@ public class TestBasket
         
         Assert.Multiple(() =>
         {
-            Assert.That(basket.Content.Count, Is.EqualTo(1));
+            Assert.That(basket.Content, Has.Count.EqualTo(1));
             Assert.That(totalItemCount, Is.EqualTo(2));
         });
     }
@@ -52,7 +52,7 @@ public class TestBasket
         
         Assert.Multiple(() =>
         {
-            Assert.That(basket.Content.Count, Is.EqualTo(2));
+            Assert.That(basket.Content, Has.Count.EqualTo(2));
             Assert.That(totalItemCount, Is.EqualTo(2));
         });
     }
@@ -71,7 +71,7 @@ public class TestBasket
         
         Assert.Multiple(() =>
         {
-            Assert.That(basket.Content.Count, Is.EqualTo(2));
+            Assert.That(basket.Content, Has.Count.EqualTo(2));
             Assert.That(totalItemCount, Is.EqualTo(5));
         });
     }
@@ -90,7 +90,7 @@ public class TestBasket
         
         Assert.Multiple(() =>
         {
-            Assert.That(basket.Content.Count, Is.EqualTo(0));
+            Assert.That(basket.Content, Has.Count.EqualTo(0));
             Assert.That(totalItemCount, Is.EqualTo(0));
         });
     }

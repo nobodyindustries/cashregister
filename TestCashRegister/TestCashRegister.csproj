@@ -37,6 +37,9 @@
       <None Update="TestData\valid_products_empty_line.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\original_products.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
