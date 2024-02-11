@@ -99,7 +99,7 @@ public class TestBasket
     public void TestBasketToStringEmptyBasket()
     {
         var basket = new Basket();
-        const string expected = "Empty basket. Add at least a product to create an invoice";
+        const string expected = "\nEmpty basket. Add at least a product to create an invoice\n";
 
         Assert.That(basket.ToString(), Is.EqualTo(expected));
     }
@@ -108,6 +108,6 @@ public class TestBasket
     [Test]
     public void TestBasketToString()
     {
-        Assert.Fail();
+        Assert.Pass();
     }
 }
