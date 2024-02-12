@@ -26,6 +26,8 @@ public class BasketRulePriceDropStrawberries: IBasketRule
         if (totalProductAmount < 3) return 0;
         var product  = basket.Content.Find((basketItem => basketItem.Item.ProductCode == "SR1"))?.Item;
         if (product == null) return 0;
+        // If the price is already below 450, we don't make any discount
+        if (product.PriceInCents <= 450) return 0;
         // The total discount should be the difference between the price and the new price times the amount
         return -((product.PriceInCents - 450) * totalProductAmount);
     }

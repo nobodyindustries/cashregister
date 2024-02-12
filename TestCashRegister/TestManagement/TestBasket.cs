@@ -136,7 +136,7 @@ public class TestBasket
         // Two units of "Product 1" should trigger the test discount
         basket.AddProduct(_product1);
         basket.AddProduct(_product1);
-        const string expected = "\n= INVOICE =\n\n- Products -\nProduct 1 (4,2€) x 2 = 8.4€\n- Discounts -\n -> 0.02€\n\nTOTAL: 8,42€\n";
+        const string expected = "\n= INVOICE =\n\n- Products -\nProduct 1 (4,2€) x 2 = 8.4€\n- Discounts -\nTest BasketRule for invalid product (No discount) -> 0.02€\n\nTOTAL: 8,42€\n";
         Assert.That(basket.ToString(), Is.EqualTo(expected));
     }
 

@@ -1,9 +1,18 @@
 using System.Globalization;
+using CashRegister.Management.RuleEngine.Rules;
 
 namespace CashRegister.Management.RuleEngine;
 
+
 public interface IBasketRule
 {
+    public static readonly Dictionary<Type, int> BasketRuleIdentifiers = new()
+        {
+            { typeof(BasketRuleTestImplementation), 0 },
+            { typeof(BasketRulePriceDropStrawberries), 1 },
+            { typeof(BasketRulePriceDropCoffee), 2 },
+            { typeof(BasketRuleBuyTwoGetOneFreeGreenTea), 3 }
+        };
     public string GetDescription();
     public bool Applies(Basket basket);
     
