@@ -16,7 +16,7 @@ public class BasketRuleTestImplementation: IBasketRule
     
     public string GetDescription()
     {
-        return IsRunningFromNUnit ? "" : "Test BasketRule for invalid product (No discount)";
+        return IsRunningFromNUnit ? "Test BasketRule for invalid product (No discount)" : "";
     }
 
     public bool Applies(Basket basket)
@@ -29,7 +29,7 @@ public class BasketRuleTestImplementation: IBasketRule
     public int GetAmountInCents(Basket basket)
     {
         // Returns the amount of times the "XX product" has been added as the discount
-        return !IsRunningFromNUnit ? 0 : Convert.ToInt32(basket.Content
+        return IsRunningFromNUnit ? 0 : Convert.ToInt32(basket.Content
             .Where(basketItem => basketItem.Item.ProductCode.Equals("XX"))
             .Sum(basketItem => basketItem.Quantity));
     }
