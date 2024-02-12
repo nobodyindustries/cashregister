@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Reflection;
 using System.Text;
 using CashRegister.Management.RuleEngine;
@@ -8,9 +7,9 @@ namespace CashRegister.Management;
 public class Basket
 {
     public List<BasketItem> Content { get; } = [];
-    private readonly List<IBasketRule> _discountRules;
+    public List<IBasketRule> DiscountRules = [];
 
-    public Basket()
+    private void ReloadRules()
     {
         // Dynamically load and instantiate all the rules
         var ruleInstances = 
@@ -18,19 +17,25 @@ public class Basket
             where t.GetInterfaces().Contains(typeof(IBasketRule))
                   && t.GetConstructor(Type.EmptyTypes) != null
             select Activator.CreateInstance(t) as IBasketRule;
-        _discountRules = ruleInstances.ToList();
+        DiscountRules = ruleInstances.ToList();
+    }
+    
+    public Basket()
+    {
+        ReloadRules();
     }
 
     public void Clear()
     {
         Content.Clear();
+        ReloadRules();
     }
 
     public void AddProduct(Product p)
     {
-        if (Content.Any((bt) => bt.Item.Equals(p)))
+        if (Content.Any(bt => bt.Item.Equals(p)))
         {
-            var item = Content.Find((bt) => bt.Item.Equals(p));
+            var item = Content.Find(bt => bt.Item.Equals(p));
             if (item != null)
             {
                 item.Quantity++;
@@ -44,7 +49,7 @@ public class Basket
 
     private decimal CalculateDiscounts()
     {
-        var totalDiscountInCents = _discountRules
+        var totalDiscountInCents = DiscountRules
             .Where(rule => rule.Applies(this))
             .Sum(rule => rule.GetAmountInCents(this));
         var discountInUnits = Convert.ToDecimal(totalDiscountInCents / 100.0);
@@ -53,7 +58,7 @@ public class Basket
 
     private bool HasApplicableRules()
     {
-        return _discountRules.Any((rule) => rule.Applies(this));
+        return DiscountRules.Any(rule => rule.Applies(this));
     }
 
     private decimal CalculateGrandTotal()
@@ -77,7 +82,7 @@ public class Basket
         if (HasApplicableRules())
         {
             sb.AppendLine("- Discounts -");
-            foreach (var rule in _discountRules.Where(rule => rule.Applies(this)))
+            foreach (var rule in DiscountRules.Where(rule => rule.Applies(this)))
             {
                 sb.AppendLine($"{rule.ToString(this)}");
             }

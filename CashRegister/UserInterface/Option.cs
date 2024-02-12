@@ -39,7 +39,7 @@ public class Option
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == this.GetType() && Equals((Option)obj);
+        return obj.GetType() == GetType() && Equals((Option)obj);
     }
 
     public override int GetHashCode()

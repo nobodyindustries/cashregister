@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text;
 using CashRegister.Logger;
 using CashRegister.Management;
@@ -43,7 +42,7 @@ public class Menu(string title)
 
     private bool ValidOption(string? input)
     {
-        return input != null && _options.Values.Any((option) => option.Selector == input);
+        return input != null && _options.Values.Any(option => option.Selector == input);
     }
 
     public void Prompt(Application application, Inventory inventory, Basket basket)

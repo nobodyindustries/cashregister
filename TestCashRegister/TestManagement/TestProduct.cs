@@ -13,12 +13,7 @@ public class TestProduct
         const string expected = "Product -> Code: CF1 | Name: Coffee | PriceInCents: 123";
         Assert.That(_product.ToString(), Is.EqualTo(expected));
     }
-
-    [Test]
-    public void TestProductEqualsNull()
-    {
-        Assert.That(_product, Is.Not.EqualTo(null));
-    }
+    
 
     [Test]
     public void TestProductEquals()
@@ -27,6 +22,7 @@ public class TestProduct
         var pDifferentCode = new Product("CF2", "Coffee", 123);
         var pDifferentName = new Product("CF1", "Caffe Latte", 123);
         var pDifferentPrice = new Product("CF1", "Coffee", 456);
+        Product? pNull = null;
         
         Assert.Multiple(() =>
         {
@@ -34,10 +30,9 @@ public class TestProduct
             Assert.That(_product, Is.Not.EqualTo(pDifferentCode));
             Assert.That(_product, Is.Not.EqualTo(pDifferentName));
             Assert.That(_product, Is.Not.EqualTo(pDifferentPrice));
-            Assert.That(_product, Is.Not.EqualTo(null));
-            #pragma warning disable NUnit2009
-            Assert.That(_product, Is.EqualTo(_product));
-            #pragma warning restore NUnit2009
+            Assert.That(_product.Equals(pNull), Is.EqualTo(false));
+            // ReSharper disable once EqualExpressionComparison
+            Assert.That(_product.Equals(_product), Is.EqualTo(true));
         });
     }
 

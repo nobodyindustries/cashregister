@@ -1,8 +1,6 @@
-using System.Diagnostics;
+using System.Text.RegularExpressions;
 using CashRegister.Management;
 using CashRegister.UserInterface;
-
-using System.Text.RegularExpressions;
 
 namespace TestCashRegister.TestUserInterface;
 
