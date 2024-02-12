@@ -17,6 +17,6 @@ public class BasketItem(Product item)
     {
         var individualPriceInUnits = Convert.ToDecimal(Item.PriceInCents / 100.0);
         decimal.Round(individualPriceInUnits, 2, MidpointRounding.AwayFromZero);
-        return $"{Item.ProductName} ({individualPriceInUnits}€) x {Quantity} = {CalculatePrice().ToString(CultureInfo.InvariantCulture)}€";
+        return $"{Item.ProductName} ({individualPriceInUnits.ToString(CultureInfo.InvariantCulture)}€) x {Quantity} = {CalculatePrice().ToString(CultureInfo.InvariantCulture)}€";
     }
 }

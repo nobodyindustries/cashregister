@@ -124,7 +124,7 @@ public class TestBasket
         var basket = new Basket();
         // One unit of "Product 1" should not trigger discounts
         basket.AddProduct(_product1);
-        const string expected = "\n= INVOICE =\n\n- Products -\nProduct 1 (4,2€) x 1 = 4.2€\n\nTOTAL: 4,2€\n";
+        const string expected = "\n= INVOICE =\n\n- Products -\nProduct 1 (4.2€) x 1 = 4.2€\n\nTOTAL: 4.2€\n";
         Assert.That(basket.ToString(), Is.EqualTo(expected));
         
     }
