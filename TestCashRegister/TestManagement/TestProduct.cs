@@ -1,29 +1,28 @@
 using CashRegister.Management;
 
-namespace TestCashRegister.TestProductManagement;
+namespace TestCashRegister.TestManagement;
 
 [TestFixture]
 public class TestProduct
 {
+    private readonly Product _product = new("CF1", "Coffee", 123);
+    
     [Test]
     public void TestProductToString()
     {
-        var p = new Product("CF1", "Coffee", 123);
         const string expected = "Product -> Code: CF1 | Name: Coffee | PriceInCents: 123";
-        Assert.That(p.ToString(), Is.EqualTo(expected));
+        Assert.That(_product.ToString(), Is.EqualTo(expected));
     }
 
     [Test]
     public void TestProductEqualsNull()
     {
-        var p = new Product("CF1", "Coffee", 123);
-        Assert.That(p, Is.Not.EqualTo(null));
+        Assert.That(_product, Is.Not.EqualTo(null));
     }
 
     [Test]
     public void TestProductEquals()
     {
-        var p = new Product("CF1", "Coffee", 123);
         var pEqual = new Product("CF1", "Coffee", 123);
         var pDifferentCode = new Product("CF2", "Coffee", 123);
         var pDifferentName = new Product("CF1", "Caffe Latte", 123);
@@ -31,13 +30,13 @@ public class TestProduct
         
         Assert.Multiple(() =>
         {
-            Assert.That(p, Is.EqualTo(pEqual));
-            Assert.That(p, Is.Not.EqualTo(pDifferentCode));
-            Assert.That(p, Is.Not.EqualTo(pDifferentName));
-            Assert.That(p, Is.Not.EqualTo(pDifferentPrice));
-            Assert.That(p, Is.Not.EqualTo(null));
+            Assert.That(_product, Is.EqualTo(pEqual));
+            Assert.That(_product, Is.Not.EqualTo(pDifferentCode));
+            Assert.That(_product, Is.Not.EqualTo(pDifferentName));
+            Assert.That(_product, Is.Not.EqualTo(pDifferentPrice));
+            Assert.That(_product, Is.Not.EqualTo(null));
             #pragma warning disable NUnit2009
-            Assert.That(p, Is.EqualTo(p));
+            Assert.That(_product, Is.EqualTo(_product));
             #pragma warning restore NUnit2009
         });
     }
@@ -45,7 +44,6 @@ public class TestProduct
     [Test]
     public void TestProductHashCode()
     {
-        var p = new Product("CF1", "Coffee", 123);
         var pEqual = new Product("CF1", "Coffee", 123);
         var pDifferent = new Product("CF2", "Coffee", 123);
 
@@ -53,10 +51,11 @@ public class TestProduct
         {
             #pragma warning disable NUnit2009
             // The hash code needs to be deterministic (no usage of, for example, random)
-            Assert.That(p.GetHashCode(), Is.EqualTo(p.GetHashCode()));
+            Assert.That(_product.GetHashCode(), Is.EqualTo(_product.GetHashCode()));
             #pragma warning restore NUnit2009
-            Assert.That(p.GetHashCode(), Is.EqualTo(pEqual.GetHashCode()));
-            Assert.That(p.GetHashCode(), Is.Not.EqualTo(pDifferent.GetHashCode()));
+            Assert.That(_product.GetHashCode(), Is.EqualTo(pEqual.GetHashCode()));
+            Assert.That(_product.GetHashCode(), Is.Not.EqualTo(pDifferent.GetHashCode()));
         });
     }
+    
 }

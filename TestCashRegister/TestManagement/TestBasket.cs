@@ -1,6 +1,6 @@
 using CashRegister.Management;
 
-namespace TestCashRegister.TestProductManagement;
+namespace TestCashRegister.TestManagement;
 
 [TestFixture]
 public class TestBasket

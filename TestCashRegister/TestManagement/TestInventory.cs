@@ -2,7 +2,7 @@ using CashRegister.Management;
 using Microsoft.VisualBasic.FileIO;
 using FileNotFoundException = System.IO.FileNotFoundException;
 
-namespace TestCashRegister.TestProductManagement;
+namespace TestCashRegister.TestManagement;
 
 [TestFixture]
 public class TestInventory
