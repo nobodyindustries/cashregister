@@ -1,5 +1,6 @@
 namespace CashRegister.Management.RuleEngine.Rules;
 
+// ReSharper disable once UnusedType.Global
 public class BasketRulePriceDropCoffee: IBasketRule
 {
     public string GetDescription()

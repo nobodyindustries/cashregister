@@ -2,6 +2,7 @@ using System.Diagnostics;
 
 namespace CashRegister.Management.RuleEngine.Rules;
 
+// ReSharper disable once UnusedType.Global
 public class BasketRuleTestImplementation: IBasketRule
 {
     // This rule is only to be executed while testing
