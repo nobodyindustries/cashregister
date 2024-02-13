@@ -62,7 +62,7 @@ public class Basket
         return DiscountRules.Any(rule => rule.Applies(this));
     }
 
-    private decimal CalculateGrandTotal()
+    public decimal CalculateGrandTotal()
     {
         return Content.Sum(basketItem => basketItem.CalculatePrice()) + CalculateDiscounts();
     }
