@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Reflection;
 using CashRegister.Management;
 using CashRegister.Management.RuleEngine;
@@ -12,6 +13,13 @@ public class TestBasket
     private readonly Product _product2 = new ("ZZ", "Product 2", 125);
 
     private readonly List<IBasketRule> _rules = GetRules();
+
+    private string cultureInvariantPrice(int priceInCents)
+    {
+        var discountInUnits = Convert.ToDecimal(priceInCents / 100.0);
+        decimal.Round(discountInUnits, 2, MidpointRounding.AwayFromZero);
+        return $"{discountInUnits.ToString(CultureInfo.InvariantCulture)}";
+    }
     
     private static List<IBasketRule> GetRules()
     {
@@ -124,9 +132,8 @@ public class TestBasket
         var basket = new Basket();
         // One unit of "Product 1" should not trigger discounts
         basket.AddProduct(_product1);
-        const string expected = "\n= INVOICE =\n\n- Products -\nProduct 1 (4.2€) x 1 = 4.2€\n\nTOTAL: 4.2€\n";
+        var expected = $"\n= INVOICE =\n\n- Products -\nProduct 1 ({cultureInvariantPrice(420)}€) x 1 = {cultureInvariantPrice(420)}€\n\nTOTAL: {cultureInvariantPrice(420)}€\n";
         Assert.That(basket.ToString(), Is.EqualTo(expected));
-        
     }
     
     [Test]
@@ -136,7 +143,7 @@ public class TestBasket
         // Two units of "Product 1" should trigger the test discount
         basket.AddProduct(_product1);
         basket.AddProduct(_product1);
-        const string expected = "\n= INVOICE =\n\n- Products -\nProduct 1 (4.2€) x 2 = 8.4€\n- Discounts -\nTest BasketRule for invalid product (No discount) -> 0.02€\n\nTOTAL: 8.42€\n";
+        var expected = $"\n= INVOICE =\n\n- Products -\nProduct 1 ({cultureInvariantPrice(420)}€) x 2 = {cultureInvariantPrice(840)}€\n- Discounts -\nTest BasketRule for invalid product (No discount) -> {cultureInvariantPrice(2)}€\n\nTOTAL: {cultureInvariantPrice(842)}€\n";
         Assert.That(basket.ToString(), Is.EqualTo(expected));
     }
 

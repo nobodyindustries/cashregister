@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 using CashRegister.Management.RuleEngine;
@@ -88,7 +89,7 @@ public class Basket
             }
         }
         sb.AppendLine();
-        sb.AppendLine($"TOTAL: {CalculateGrandTotal()}€"); 
+        sb.AppendLine($"TOTAL: {CalculateGrandTotal().ToString(CultureInfo.InvariantCulture)}€"); 
         return sb.ToString();
     }
 }
